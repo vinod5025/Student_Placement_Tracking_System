@@ -14,15 +14,15 @@ public class AdminDashboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out=response.getWriter();
 		RequestDispatcher header =request.getRequestDispatcher("Admin/header.html");
-		header.forward(request, response);
+		header.include(request, response);
 		
 		
 		
 		
-		out.println("hiiii");
+		out.println("<h1>hiiii</h1>");
 		
 		RequestDispatcher footer =request.getRequestDispatcher("Admin/footer.html");
-		footer.forward(request, response);
+		footer.include(request, response);
 		
 		
 		
