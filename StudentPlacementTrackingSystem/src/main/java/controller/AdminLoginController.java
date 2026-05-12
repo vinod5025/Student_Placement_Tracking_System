@@ -103,6 +103,7 @@ public class AdminLoginController extends HttpServlet {
 			
 			if (result) {
 				response.sendRedirect("admin/dashboard.html");
+				out.println("success");
 			} else {
 				System.out.println("Something went wrong...!");
 			}

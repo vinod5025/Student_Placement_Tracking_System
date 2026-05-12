@@ -7,7 +7,7 @@ public class AdminLoginRepositoryImpl  extends DBConfig implements AdminLoginRep
 	@Override
 	public boolean isAddminLogin(AdminLoginModel adminLogin) {
 		boolean result=false;
-		System.out.println("adminLogin:::"+adminLogin);
+		
 		try
 		{
 			pstmt=conn.prepareStatement("select * from admin where email=? and password=?");
@@ -15,7 +15,6 @@ public class AdminLoginRepositoryImpl  extends DBConfig implements AdminLoginRep
 			pstmt.setString(2,adminLogin.getPassword());
 			rs=pstmt.executeQuery();
 		
-			System.out.println("rs null ???=="+(rs==null));
 			if(rs!=null)
 			{
 				result= true;
@@ -26,7 +25,7 @@ public class AdminLoginRepositoryImpl  extends DBConfig implements AdminLoginRep
 			System.out.println(e);
 		}
 		
-		System.out.println("result====="+result);
+		
 		return result;
 	}
 
