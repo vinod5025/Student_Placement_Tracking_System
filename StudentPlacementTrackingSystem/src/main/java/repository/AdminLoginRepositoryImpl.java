@@ -15,14 +15,14 @@ public class AdminLoginRepositoryImpl  extends DBConfig implements AdminLoginRep
 			pstmt.setString(2,adminLogin.getPassword());
 			rs=pstmt.executeQuery();
 		
-			if(rs!=null)
+			if(rs.next())
 			{
 				result= true;
 			}
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			System.out.println("error is "+e);
 		}
 		
 		

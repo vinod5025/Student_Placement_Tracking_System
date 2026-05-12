@@ -102,8 +102,10 @@ public class AdminLoginController extends HttpServlet {
 			boolean result = admSrc.isAdminLogin(admlogin);
 			
 			if (result) {
-				response.sendRedirect("admin/dashboard.html");
 				out.println("success");
+				
+				response.sendRedirect("AdminDashboard");
+				
 			} else {
 				System.out.println("Something went wrong...!");
 			}
