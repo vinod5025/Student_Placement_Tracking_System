@@ -1,0 +1,8 @@
+.heading
+{
+      background: linear-gradient(45deg, #11677E 0%, #294c72 60%, #535085 60%, #00bfff 62%, #36587c 65%, white 80%);
+    border-left: 7px solid #F30B34;
+    color: white;
+    font-weight: bold;
+    padding: 6px 10px 3px 10px;
+}
