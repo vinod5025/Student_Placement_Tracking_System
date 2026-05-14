@@ -6,5 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StudentLoginModel {
-private String email,password;
+
+	private int sid;
+
+	private String email;
+
+	private String password;
 }

@@ -90,7 +90,7 @@ public class StudentLoginController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		PrintWriter out = response.getWriter();
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		
@@ -107,10 +107,17 @@ public class StudentLoginController extends HttpServlet {
 		{
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("studentEmail", email);
 
-			
-			response.sendRedirect("studentDashboard");
+			session.setAttribute(
+					"studentId",
+					smodel.getSid());
+
+			session.setAttribute(
+					"studentEmail",
+					smodel.getEmail());
+
+			response.sendRedirect(
+					"studentDashboard");
 		}
 	}
 }

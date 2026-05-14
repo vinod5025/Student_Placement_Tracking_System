@@ -24,8 +24,7 @@ public class ViewCompanyController extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		RequestDispatcher header =
-				request.getRequestDispatcher("Admin/header.html");
+		RequestDispatcher header =request.getRequestDispatcher("Admin/header.html");
 
 		header.include(request, response);
 
@@ -74,7 +73,7 @@ public class ViewCompanyController extends HttpServlet {
 			out.println("<td>" + a.getLocation() + "</td>");
 			out.println("<td>" + a.getCompany_criteria() + "</td>");
 			out.println("<td>");
-			out.println("<a href=''>");
+			out.println("<a href='updateCompany?id="+a.getId()+"'>");
 			out.println("<button class='btn btn-primary mr-2'>");
 			out.println("<i class='fa fa-edit'></i>");
 			out.println("</button>");
@@ -108,13 +107,11 @@ public class ViewCompanyController extends HttpServlet {
 
 		String cname = request.getParameter("company_name");
 
-		int cpackage = Integer.parseInt(
-				request.getParameter("company_package"));
+		int cpackage = Integer.parseInt(request.getParameter("company_package"));
 
 		String clocation = request.getParameter("company_location");
 
-		double crt = Double.parseDouble(
-				request.getParameter("company_criteria"));
+		double crt = Double.parseDouble(request.getParameter("company_criteria"));
 
 		AddCompanyModel amodel = new AddCompanyModel();
 

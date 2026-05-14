@@ -43,6 +43,9 @@ public class ViewStudentController extends HttpServlet {
 	out.println("<th>Email</th>");
 	out.println("<th>Contact</th>");
 	out.println("<th>Course</th>");
+	out.println("<th>Passout Year</th>");
+	out.println("<th>Percentage Criteria</th>");
+	
 	out.println("<th>Action</th>");
 
 	out.println("</tr>");

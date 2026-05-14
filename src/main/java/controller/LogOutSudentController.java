@@ -15,12 +15,13 @@ public class LogOutSudentController extends HttpServlet {
 		// TODO Auto-generated method stub
 			PrintWriter out=response.getWriter();
 			HttpSession session = request.getSession(false);
-			/*
-			 * if(session != null) { session.invalidate(); }
-			 * 
-			 * response.sendRedirect("index.jsp");
-			 */
-			out.println("Hiii");
+			
+			  if(session != null) { session.invalidate(); }
+			  
+			 response.sendRedirect("adminLogin");
+			 
+			
+			
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
