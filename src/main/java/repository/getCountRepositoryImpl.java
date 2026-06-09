@@ -2,11 +2,13 @@ package repository;
 
 import model.AddCompanyModel;
 import model.AddStudentModel;
+import model.PlacementModel;
 
 public class getCountRepositoryImpl extends DBConfig implements getCountRepository{
 
 	int scount=0;
 	int ccount=0;
+	int pcount=0;
 	@Override
 	public int getStudentsCount(AddStudentModel amodel) {
 		try
@@ -43,6 +45,22 @@ public class getCountRepositoryImpl extends DBConfig implements getCountReposito
 		}
 		
 		return ccount ;
+	}
+
+	public int getPlacedCount(PlacementModel pmodel) {
+
+		try {
+			pstmt = conn.prepareStatement("select count(*) from placement where status='placed'");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				pcount = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			System.out.println("e");
+		}
+
+		return pcount;
 	}
 
 }

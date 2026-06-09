@@ -11,62 +11,54 @@ import model.PlacementModel;
 import service.ApplyCompanyServiceImpl;
 
 @WebServlet("/applyCompany")
-public class ApplyStudentController
-extends HttpServlet {
+public class ApplyStudentController extends HttpServlet {
 
-	protected void doGet(
-			HttpServletRequest request,
-			HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType(
-				"text/html");
+		response.setContentType("text/html");
 
-		PrintWriter out =
-				response.getWriter();
+		PrintWriter out = response.getWriter();
 
-		HttpSession session =
-				request.getSession(false);
+		HttpSession session = request.getSession(false);
 
-		if(session != null && session.getAttribute( "studentId") != null) {	int sid =
-			(Integer)session.getAttribute(
-					"studentId");
+		// CHECK SESSION
+		if (session != null && session.getAttribute("sid") != null) {
 
-			int cid =
-			Integer.parseInt(
-			request.getParameter("cid"));
+			int sid = (Integer) session.getAttribute("sid");
 
-			PlacementModel pmodel =
-					new PlacementModel();
+			int cid = Integer.parseInt(request.getParameter("cid"));
+
+			PlacementModel pmodel = new PlacementModel();
 
 			pmodel.setSid(sid);
 
 			pmodel.setCid(cid);
 
-			pmodel.setStatus(
-					"Applied");
+			pmodel.setStatus("Applied");
 
-			ApplyCompanyServiceImpl as =
-					new ApplyCompanyServiceImpl();
+			ApplyCompanyServiceImpl as = new ApplyCompanyServiceImpl();
 
-			boolean b =
-					as.isApplyCompany(
-							pmodel);
+			boolean b = as.isApplyCompany(pmodel);
 
-			if(b)
-			{
+			if (b) {
+
 				response.sendRedirect("viewStudentCompany");
+
+			} else {
+
+				out.println("<h2>Application Failed</h2>");
 			}
-			else
-			{
-				out.println(
-				"<h2>Application Failed</h2>");
-			}
+
+		} else {
+
+			response.sendRedirect("studentLogin");
 		}
-		else
-		{
-			response.sendRedirect(
-					"studentLogin");
-		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doGet(request, response);
 	}
 }

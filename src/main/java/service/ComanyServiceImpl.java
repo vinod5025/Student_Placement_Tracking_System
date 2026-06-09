@@ -19,4 +19,11 @@ public class ComanyServiceImpl implements CompanyService {
 	public ArrayList<AddCompanyModel> getAllCompanies() {
 		return cr.getAllCompanies();
 	}
+	
+
+	@Override
+	public boolean isDeleteCompany(AddCompanyModel amodel) {
+		// TODO Auto-generated method stub
+		return cr.isAddCompany(amodel);
+	}
 }

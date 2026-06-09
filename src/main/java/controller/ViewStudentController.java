@@ -73,8 +73,8 @@ int cnt=0;
 		out.println("</button>");
 		out.println("</a>");
 
-		out.println("<a href=''>");
-		out.println("<button class='btn btn-danger btn-sm'>");
+		out.println("<a href='deleteStudent?sid="+s.getId()+"'>");
+		out.println("<button class='btn btn-danger btn-sm' onclick='return confirm(\"Are You Sure\")'>");
 		out.println("<i class='fa fa-trash'></i>");
 		out.println("</button>");
 		out.println("</a>");

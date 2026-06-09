@@ -19,6 +19,10 @@ public class StudentRegisterServiceImpl implements StudentRegisterService {
 	public ArrayList getAllStudent() {
 		return rimpl.getAllStudent();
 	}
+	public boolean isDeleteStudent(AddStudentModel amodel)
+	{
+		return rimpl.isDeleteStudent(amodel);
+	}
 
 	
 	

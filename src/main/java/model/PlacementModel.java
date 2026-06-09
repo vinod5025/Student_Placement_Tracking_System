@@ -13,6 +13,10 @@ public class PlacementModel {
 
 	private int cid;
 
+	private String studentName;
+
+	private String companyName;
+
 	private String apply_date;
 
 	private String status;

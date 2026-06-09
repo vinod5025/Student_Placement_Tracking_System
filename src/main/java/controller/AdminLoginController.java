@@ -20,70 +20,177 @@ public class AdminLoginController extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
+
 		PrintWriter out = response.getWriter();
 
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<title>Admin Login</title>");
+		out.println("""
 
-		out.println("<link rel='stylesheet' "
-				+ "href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css'>");
+				<!DOCTYPE html>
 
-		out.println("<style>");
-		out.println("body{"
-				+ "background:#f2f2f2;"
-				+ "height:100vh;"
-				+ "display:flex;"
-				+ "justify-content:center;"
-				+ "align-items:center;"
-				+ "}");
+				<html>
 
-		out.println(".login-box{"
-				+ "width:400px;"
-				+ "background:white;"
-				+ "padding:40px;"
-				+ "border-radius:10px;"
-				+ "box-shadow:0px 0px 15px rgba(0,0,0,0.2);"
-				+ "}");
+				<head>
 
-		out.println(".title{"
-				+ "text-align:center;"
-				+ "margin-bottom:30px;"
-				+ "font-weight:bold;"
-				+ "}");
+				<title>Admin Login</title>
 
-		out.println("</style>");
+				<meta charset="UTF-8">
 
-		out.println("</head>");
-		out.println("<body>");
+				<meta name="viewport"
+					content="width=device-width, initial-scale=1.0">
 
-		out.println("<div class='login-box'>");
+				<link
+				href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+				rel="stylesheet">
 
-		out.println("<h2 class='title'>Admin Login</h2>");
+				<link
+				rel="stylesheet"
+				href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-		out.println("<form action='adminLogin' method='post'>");
+				<link
+				href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+				rel="stylesheet">
 
-		out.println("<div class='form-group'>");
-		out.println("<label>Email</label>");
-		out.println("<input type='email' name='email' class='form-control' placeholder='Enter Email'>");
-		out.println("</div>");
+				</head>
 
-		out.println("<div class='form-group'>");
-		out.println("<label>Password</label>");
-		out.println("<input type='password' name='password' class='form-control' placeholder='Enter Password'>");
-		out.println("</div>");
+				<body
+				class="bg-secondary bg-gradient">
 
-		out.println("<button type='submit' name='s' class='btn btn-primary btn-block'>Login</button>");
+				<div class="container">
 
-		out.println("</form>");
+					<div class="row justify-content-center align-items-center"
+						style="min-height:100vh;">
 
-		out.println("</div>");
+						<div class="col-md-4">
 
-		out.println("</body>");
-		out.println("</html>");
+							<div class="card border-0 shadow-lg rounded-4"
+								data-aos="fade-up"
+								data-aos-duration="1000">
+
+								<div class="card-body p-4">
+
+									<div class="text-center mb-4">
+
+										<div class="mb-3">
+
+											<i class="fa-solid fa-user-shield
+												fs-1 text-dark"></i>
+
+										</div>
+
+										<h3 class="fw-bold">
+
+											Admin Login
+
+										</h3>
+
+										<p class="text-muted small">
+
+											Student Placement Tracking System
+
+										</p>
+
+									</div>
+
+									<form action="adminLogin"
+										method="post">
+
+										<div class="mb-3">
+
+											<label class="form-label fw-semibold">
+
+												Email Address
+
+											</label>
+
+											<div class="input-group">
+
+												<span class="input-group-text bg-white">
+
+													<i class="fa-solid fa-envelope text-secondary"></i>
+
+												</span>
+
+												<input type="email"
+													name="email"
+													class="form-control"
+													placeholder="Enter email"
+													required>
+
+											</div>
+
+										</div>
+
+										<div class="mb-4">
+
+											<label class="form-label fw-semibold">
+
+												Password
+
+											</label>
+
+											<div class="input-group">
+
+												<span class="input-group-text bg-white">
+
+													<i class="fa-solid fa-lock text-secondary"></i>
+
+												</span>
+
+												<input type="password"
+													name="password"
+													class="form-control"
+													placeholder="Enter password"
+													required>
+
+											</div>
+
+										</div>
+
+										<div class="d-grid">
+
+											<button type="submit"
+												class="btn btn-dark">
+
+												<i class="fa-solid fa-right-to-bracket me-2"></i>
+
+												Login
+
+											</button>
+
+										</div>
+
+									</form>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+				</script>
+
+				<script
+				src="https://unpkg.com/aos@2.3.4/dist/aos.js">
+				</script>
+
+				<script>
+
+					AOS.init();
+
+				</script>
+
+				</body>
+
+				</html>
+
+				""");
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

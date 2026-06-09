@@ -11,9 +11,7 @@ public class CompanyRepositoryImpl extends DBConfig implements CompanyRepository
 
 		try {
 
-			pstmt = conn.prepareStatement(
-				"insert into company values('0',?,?,?,?)"
-			);
+			pstmt = conn.prepareStatement("insert into company values('0',?,?,?,?)");
 
 			pstmt.setString(1, amodel.getCompany_name());
 			pstmt.setInt(2, amodel.getCompany_package());
@@ -23,7 +21,7 @@ public class CompanyRepositoryImpl extends DBConfig implements CompanyRepository
 			int value = pstmt.executeUpdate();
 			System.out.println(value);
 
-			if (value>0) {
+			if (value > 0) {
 				return true;
 			}
 
@@ -36,14 +34,12 @@ public class CompanyRepositoryImpl extends DBConfig implements CompanyRepository
 
 	public ArrayList<AddCompanyModel> getAllCompanies() {
 		ArrayList<AddCompanyModel> list = new ArrayList<>();
-		try
-		{
-			pstmt=conn.prepareStatement("select * from company");
-			rs=pstmt.executeQuery();
-			while(rs.next())
-			{
-				AddCompanyModel amodel=new AddCompanyModel();
-				
+		try {
+			pstmt = conn.prepareStatement("select * from company");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				AddCompanyModel amodel = new AddCompanyModel();
+
 				amodel.setId(rs.getInt(1));
 
 				amodel.setCompany_name(rs.getString(2));
@@ -55,14 +51,27 @@ public class CompanyRepositoryImpl extends DBConfig implements CompanyRepository
 				amodel.setCompany_criteria(rs.getDouble(5));
 				list.add(amodel);
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return list;
 	}
 
-	
-	
+	@Override
+	public boolean isDeleteCompany(AddCompanyModel amodel) {
+		try {
+			pstmt = conn.prepareStatement("delete from company where cid=?");
+			pstmt.setInt(1, amodel.getId());
+			int value = pstmt.executeUpdate();
+			if (value != 0)
+				return true;
+			else
+				return false;
+
+		} catch (Exception e) {
+
+		}
+		return false;
+	}
+
 }

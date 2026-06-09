@@ -25,40 +25,55 @@ public class StudentDashbaordController extends HttpServlet {
 		HttpSession session =
 				request.getSession(false);
 
-		if(session != null)
-		{
-			String email =
-			(String)session.getAttribute(
-					"studentEmail");
+		if (session != null
+				&& session.getAttribute("studentEmail") != null) {
 
+			// Get Session Data
+			String email =
+					(String) session.getAttribute("studentEmail");
+
+			int studentId =
+					(Integer) session.getAttribute("sid");
+
+			// Header
 			RequestDispatcher header =
 					request.getRequestDispatcher(
 							"Student/header.html");
 
 			header.include(request, response);
 
+			// Dashboard UI
 			out.println("<div class='container mt-5'>");
 
-			out.println("<div class='card shadow p-4'>");
+			out.println("<div class='card shadow border-0'>");
 
-			out.println("<h2 class='text-success'>");
-			out.println("Welcome : " + email);
+			out.println("<div class='card-body p-5'>");
+
+			out.println("<h2 class='text-primary font-weight-bold'>");
+			out.println("Mail is "+email+" & ID is "+studentId);
 			out.println("</h2>");
 
+			out.println("<hr>");
+			out.println("<div class='mt-4'>");
+
+			out.println("</div>");
+
 			out.println("</div>");
 
 			out.println("</div>");
 
+			out.println("</div>");
+
+			// Footer
 			RequestDispatcher footer =
 					request.getRequestDispatcher(
 							"Student/footer.html");
 
 			footer.include(request, response);
-		}
-		else
-		{
-			response.sendRedirect(
-					"studentLogin");
+
+		} else {
+
+			response.sendRedirect("studentLogin");
 		}
 	}
 

@@ -6,6 +6,8 @@ import model.AddStudentModel;
 
 public interface StudentRegisterRepository {
 	public boolean isAddStudent(AddStudentModel smodel);
+
 	public ArrayList<AddStudentModel> getAllStudent();
+	public boolean isDeleteStudent(AddStudentModel amodel);
 
 }

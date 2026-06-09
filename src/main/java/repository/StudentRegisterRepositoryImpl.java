@@ -78,4 +78,29 @@ public class StudentRegisterRepositoryImpl extends DBConfig implements StudentRe
 		return list;
 	}
 
+
+
+	@Override
+	public boolean isDeleteStudent(AddStudentModel amodel) {
+		try
+		{
+			pstmt=conn.prepareStatement("delete from student where sid =?");
+			pstmt.setInt(1, amodel.getId());
+			int value=pstmt.executeUpdate();
+			if(value!=0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.print(e);
+		}
+		return false;
+	}
+
 }

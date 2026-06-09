@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 import model.StudentLoginModel;
 import repository.StudentLoginRepositoryImpl;
 
@@ -19,105 +20,85 @@ public class StudentLoginController extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
+
 		PrintWriter out = response.getWriter();
 
-		out.print(
-				"<!DOCTYPE html>" +
-				"<html>" +
-				"<head>" +
-				"<meta charset='UTF-8'>" +
-				"<meta name='viewport' content='width=device-width, initial-scale=1'>" +
+		out.print("<!DOCTYPE html>" + "<html>" + "<head>" + "<meta charset='UTF-8'>"
+				+ "<meta name='viewport' content='width=device-width, initial-scale=1'>" +
 
-				"<link rel='stylesheet' " +
-				"href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css'>" +
+				"<link rel='stylesheet' "
+				+ "href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css'>" +
 
-				"<title>Student Login</title>" +
-				"</head>" +
+				"<title>Student Login</title>" + "</head>" +
 
 				"<body class='bg-light'>" +
 
-				"<div class='container mt-5'>" +
-				"<div class='row justify-content-center'>" +
+				"<div class='container mt-5'>" + "<div class='row justify-content-center'>" +
 
 				"<div class='col-md-5'>" +
 
 				"<div class='card shadow'>" +
 
-				"<div class='card-header text-center bg-primary text-white'>" +
-				"<h3>Student Login</h3>" +
-				"</div>" +
+				"<div class='card-header text-center bg-primary text-white'>" + "<h3>Student Login</h3>" + "</div>" +
 
 				"<div class='card-body'>" +
 
 				"<form action='' method='post'>" +
 
-				"<div class='form-group'>" +
-				"<label>Student Username</label>" +
-				"<input type='text' name='email' class='form-control' " +
-				"placeholder='Enter Username' required>" +
-				"</div>" +
+				"<div class='form-group'>" + "<label>Student Username</label>"
+				+ "<input type='text' name='email' class='form-control' placeholder='Enter Username' required>"
+				+ "</div>" +
 
-				"<div class='form-group'>" +
-				"<label>Password</label>" +
-				"<input type='password' name='password' class='form-control' " +
-				"placeholder='Enter Password' required>" +
-				"</div>" +
+				"<div class='form-group'>" + "<label>Password</label>"
+				+ "<input type='password' name='password' class='form-control' placeholder='Enter Password' required>"
+				+ "</div>" +
 
-				"<button type='submit' class='btn btn-primary btn-block'>" +
-				"Login" +
-				"</button>" +
+				"<button type='submit' class='btn btn-primary btn-block'>" + "Login" + "</button>" +
 
 				"</form>" +
 
-				"<div class='text-center mt-3'>" +
-				"New Student? " +
-				"<a href='studentRegister'>Register Here</a>" +
-				"</div>" +
+				"<div class='text-center mt-3'>" + "New Student? " + "<a href='studentRegister'>Register Here</a>"
+				+ "</div>" +
 
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
+				"</div>" + "</div>" + "</div>" + "</div>" + "</div>" +
 
-				"</body>" +
-				"</html>"
-		);
-		
-		
-		
+				"</body>" + "</html>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		String email=request.getParameter("email");
-		String password=request.getParameter("password");
-		
-		StudentLoginModel smodel=new StudentLoginModel();
-		
+
+		String email = request.getParameter("email");
+
+		String password = request.getParameter("password");
+
+		StudentLoginModel smodel = new StudentLoginModel();
+
 		smodel.setEmail(email);
 		smodel.setPassword(password);
-		
-		StudentLoginRepositoryImpl login =new StudentLoginRepositoryImpl();
 
-		boolean res=login.isLogin(smodel);
-		System.out.print("res is"+res);
-		if(res)
-		{
-			
+		StudentLoginRepositoryImpl login = new StudentLoginRepositoryImpl();
+
+		boolean res = login.isLogin(smodel);
+
+		
+
+		if (res) {
+
+			// Get Student ID
+			int studentId = login.getStudentId(email);
+
 			HttpSession session = request.getSession();
 
-			session.setAttribute(
-					"studentId",
-					smodel.getSid());
+			session.setAttribute("studentEmail", email);
 
-			session.setAttribute(
-					"studentEmail",
-					smodel.getEmail());
+			session.setAttribute("sid", studentId);
 
-			response.sendRedirect(
-					"studentDashboard");
+			response.sendRedirect("studentDashboard");
+
+		} else {
+
+			response.getWriter().println("<h3 style='color:red;text-align:center;'>Invalid Email or Password</h3>");
 		}
 	}
 }

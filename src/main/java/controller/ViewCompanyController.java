@@ -24,16 +24,15 @@ public class ViewCompanyController extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		RequestDispatcher header =request.getRequestDispatcher("Admin/header.html");
+		RequestDispatcher header = request.getRequestDispatcher("Admin/header.html");
 
 		header.include(request, response);
 
 		ComanyServiceImpl cs = new ComanyServiceImpl();
 
 		ArrayList<AddCompanyModel> list = cs.getAllCompanies();
-		int count=0;
+		int count = 0;
 
-		
 		out.println("<div class='card shadow border-0 table-responsive'>");
 
 		// Heading
@@ -67,20 +66,20 @@ public class ViewCompanyController extends HttpServlet {
 
 			out.println("<tr>");
 			++count;
-			out.println("<td>" + count+ "</td>");
+			out.println("<td>" + count + "</td>");
 			out.println("<td>" + a.getCompany_name() + "</td>");
 			out.println("<td>" + a.getCompany_package() + "</td>");
 			out.println("<td>" + a.getLocation() + "</td>");
 			out.println("<td>" + a.getCompany_criteria() + "</td>");
 			out.println("<td>");
-			out.println("<a href='updateCompany?id="+a.getId()+"'>");
+			out.println("<a href='updateCompany?id=" + a.getId() + "'>");
 			out.println("<button class='btn btn-primary mr-2'>");
 			out.println("<i class='fa fa-edit'></i>");
 			out.println("</button>");
 			out.println("</a>");
 
-			out.println("<a href=''>");
-			out.println("<button class='btn btn-danger'>");
+			out.println("<a href='deleteCompany?cid="+a.getId()+"'>");
+			out.println("<button class='btn btn-danger' onclick='return confirm(\"Are You Sure..!\")'>");
 			out.println("<i class='fa fa-trash'></i>");
 			out.println("</button>");
 			out.println("</a>");
@@ -96,8 +95,7 @@ public class ViewCompanyController extends HttpServlet {
 
 		out.println("</div>");
 
-		RequestDispatcher footer =
-				request.getRequestDispatcher("Admin/footer.html");
+		RequestDispatcher footer = request.getRequestDispatcher("Admin/footer.html");
 
 		footer.include(request, response);
 	}

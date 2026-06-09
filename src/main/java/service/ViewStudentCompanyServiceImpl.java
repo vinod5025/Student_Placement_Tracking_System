@@ -11,5 +11,9 @@ ViewStudentCompanyRepositoryImpl vc=new ViewStudentCompanyRepositoryImpl();
 	public ArrayList<AddCompanyModel> getAllCompanies() {
 		return vc.getAllCompanies();
 	}
+	@Override
+	public boolean isApplied(int studentId, int companyId) {
+		return vc.isApplied(studentId,companyId);
+	}
 
 }

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.AddCompanyModel;
 import model.AddStudentModel;
+import model.PlacementModel;
 import service.getCountServiceImpl;
 
 import java.io.IOException;
@@ -24,12 +25,13 @@ public class AdminDashboard extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		AddStudentModel amodel = new AddStudentModel();
-		AddCompanyModel cmodel=new AddCompanyModel();
+		AddCompanyModel cmodel = new AddCompanyModel();
+		PlacementModel pmodel = new PlacementModel();
 		getCountServiceImpl gcnt = new getCountServiceImpl();
-		
 
 		int studentCount = gcnt.getStudentsCount(amodel);
-		int companyCount=gcnt.getCompaniesCount(cmodel);
+		int companyCount = gcnt.getCompaniesCount(cmodel);
+		int placedCount = gcnt.getPlacedCount(pmodel);
 
 		// Header
 		RequestDispatcher header = request.getRequestDispatcher("Admin/header.html");
@@ -37,130 +39,127 @@ public class AdminDashboard extends HttpServlet {
 
 		out.println("""
 
-<!DOCTYPE html>
-<html>
-<head>
+				<div class="container-fluid mt-4">
 
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+					<div class="row mb-4">
 
-<style>
+						<div class="col-md-12">
 
-body{
-	background:#f4f6f9;
-}
+							<div class="text-white rounded p-4 shadow">
 
-.dashboard-title{
-	font-size:35px;
-	font-weight:bold;
-	color:#343a40;
-}
 
-.card{
-	border:none;
-	border-radius:15px;
-	box-shadow:0px 4px 15px rgba(0,0,0,0.1);
-	transition:0.3s;
-}
 
-.card:hover{
-	transform:translateY(-5px);
-}
+								<h3 class="mb-0 heading">
+									Student Placement Tracking System
+								</h3>
 
-.count{
-	font-size:45px;
-	font-weight:bold;
-}
+							</div>
 
-.icon{
-	font-size:50px;
-}
+						</div>
 
-</style>
-
-</head>
-
-<body>
-
-<div class="container mt-5">
-
-	<div class="text-center mb-5">
-		<h1 class="dashboard-title">Count Of Records</h1>
-		<p class="text-muted">Student Placement Tracking System</p>
-	</div>
-
-	<div class="row">
-
-		<!-- Students Card -->
-		<div class="col-md-4 mb-4">
-			<div class="card bg-primary text-white">
-				<div class="card-body text-center">
-
-					<div class="icon mb-3">
-						🎓
 					</div>
 
-					<h4>Total Students</h4>
+					<div class="row g-4">
 
-					<div class="count">
-""");
+						<!-- Students Card -->
+
+						<div class="col-md-4">
+
+							<div class="card border-0 shadow-lg h-100">
+
+								<div class="card-body text-center">
+
+									<div class="display-3 mb-3">
+										🎓
+									</div>
+
+									<h4 class="fw-bold text-primary">
+										Total Students
+									</h4>
+
+									<h1 class="display-4 fw-bold">
+				""");
 
 		out.println(studentCount);
 
 		out.println("""
+
+									</h1>
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<!-- Companies Card -->
+
+						<div class="col-md-4">
+
+							<div class="card border-0 shadow-lg h-100">
+
+								<div class="card-body text-center">
+
+									<div class="display-3 mb-3">
+										🏢
+									</div>
+
+									<h4 class="fw-bold text-success">
+										Total Companies
+									</h4>
+
+									<h1 class="display-4 fw-bold">
+				""");
+
+		out.println(companyCount);
+
+		out.println("""
+
+											</h1>
+
+										</div>
+
+									</div>
+
+								</div>
+
+								<!-- Placement Card -->
+
+								<div class="col-md-4">
+
+									<div class="card border-0 shadow-lg h-100">
+
+										<div class="card-body text-center">
+
+											<div class="display-3 mb-3">
+												💼
+											</div>
+
+											<h4 class="fw-bold text-danger">
+												Total Placements
+											</h4>
+
+											<h1 class="display-4 fw-bold">
+				""");
+
+		out.println(placedCount);
+
+		out.println("""
+
+
+									</h1>
+
+								</div>
+
+							</div>
+
+						</div>
+
 					</div>
 
 				</div>
-			</div>
-		</div>
 
-		<!-- Companies Card -->
-		<div class="col-md-4 mb-4">
-			<div class="card bg-success text-white">
-				<div class="card-body text-center">
-
-					<div class="icon mb-3">
-						🏢
-					</div>
-
-					<h4>Total Companies</h4>
-
-					<div class="count">""");
-					out.println(companyCount);
-					out.println("""
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<!-- Placement Card -->
-		<div class="col-md-4 mb-4">
-			<div class="card bg-danger text-white">
-				<div class="card-body text-center">
-
-					<div class="icon mb-3">
-						💼
-					</div>
-
-					<h4>Total Placements</h4>
-
-					<div class="count">
-						15
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-</div>
-
-</body>
-</html>
-
-""");
+				""");
 
 		// Footer
 		RequestDispatcher footer = request.getRequestDispatcher("Admin/footer.html");

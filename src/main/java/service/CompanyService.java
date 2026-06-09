@@ -8,4 +8,5 @@ public interface CompanyService {
 
 	public boolean isAddCompany(AddCompanyModel amodel);
 	public ArrayList<AddCompanyModel> getAllCompanies();
+	public boolean isDeleteCompany(AddCompanyModel amodel);
 }

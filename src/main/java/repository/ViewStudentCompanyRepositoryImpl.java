@@ -33,5 +33,29 @@ public class ViewStudentCompanyRepositoryImpl extends DBConfig implements ViewSt
 		
 		return list;
 	}
+	@Override
+	public boolean isApplied(int studentId, int companyId) {
+
+	    boolean flag = false;
+
+	    try {
+	    		pstmt=conn.prepareStatement( "SELECT * FROM placement WHERE sid=? and cid=?");
+
+	    
+	        pstmt.setInt(1, studentId);
+	        pstmt.setInt(2, companyId);
+
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	            flag = true; // already applied
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return flag;
+	}
 
 }
